@@ -65,8 +65,9 @@ class AdminArticleController extends Controller
             'content' => $request->input('content'),
         ]);
         
-        return redirect(route('admin.dashboard.article'));
-        // }
+
+
+        return redirect(route('admin.dashboard.article'))->with('success','Article '.$request->input('title').' berhasil di tambahkan');
         
     }
 

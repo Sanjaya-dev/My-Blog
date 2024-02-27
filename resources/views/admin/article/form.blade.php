@@ -33,7 +33,8 @@
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="window.history.back()">Cancle</button>
+                        <button type="submit" class="btn btn-primary btn-sm ml-3">Submit</button>
                     </form>
                 </div>
             </div>

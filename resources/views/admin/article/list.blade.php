@@ -12,13 +12,22 @@
                 style="margin-left: 300px">Add Article</a>
         </div>
     </div>
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        <strong>{{session('success')}}</strong>
+        <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    @endif
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
-                <th scope="col">Photo</th>
+                <th scope="col" class="text-center">Photo</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -27,8 +36,10 @@
             <tr>
                 <th scope="row">{{$key + 1}}</th>
                 <td>{{$article->title}}</td>
-                <td>{{Auth::user($article->user_id)->name}}</td>
-                <td>{{$article->photo}}</td>
+                <td>{{$article->User->name}}</td>
+                <td><img src="{{asset('storage/thumbnails/'.$article->photo)}}" class="rounded mx-auto d-block"
+                        style="width: 18rem;"></td>
+                <td><a href="#" class="btn btn-success">Edit</a></td>
             </tr>
             @endforeach
             @else
