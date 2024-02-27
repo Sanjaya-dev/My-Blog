@@ -38,8 +38,11 @@
                 <td>{{$article->title}}</td>
                 <td>{{$article->User->name}}</td>
                 <td><img src="{{asset('storage/thumbnails/'.$article->photo)}}" class="rounded mx-auto d-block"
-                        style="width: 18rem;"></td>
-                <td><a href="#" class="btn btn-success">Edit</a></td>
+                        style="width: 10rem;"></td>
+                <td>
+                    <a href="#" class="btn btn-success btn-sm">Edit</a>
+                    <a href="#" class="btn btn-danger btn-sm ml-3">Delet</a>
+                </td>
             </tr>
             @endforeach
             @else
