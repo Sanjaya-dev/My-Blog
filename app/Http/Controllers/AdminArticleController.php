@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +16,7 @@ class AdminArticleController extends Controller
      */
     public function index()
     {
-        $articles = DB::select('select * from articles');
+        $articles = Article::with('User')->get();
         return view('admin.article.list',[
             'articles' => $articles
         ]);
