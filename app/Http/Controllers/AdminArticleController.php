@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,7 +31,10 @@ class AdminArticleController extends Controller
     public function create()
     {
         
-        return view('admin.article.form');
+        return view('admin.article.form',[
+            'button' => 'Submit',
+            'url' => 'admin.dashboard.article.store'
+        ]);
     }
 
     /**
@@ -90,7 +94,13 @@ class AdminArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        
+
+        return view('admin.article.form',[
+            'article' => $article,
+            'button' => 'Update',
+            'url' => 'admin.dashboard.article.update'
+        ]);
     }
 
     /**
@@ -102,7 +112,33 @@ class AdminArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+         // Validate the request data
+        $validator =Validator::make($request->all(),[
+            'title' => 'required',
+            'photo' => 'image',
+            'content' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+        }
+        
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/thumbnails',$image,$filename);
+            $article->photo = $filename;
+        }
+        
+        
+            $article->title = $request->input('title');
+            $article->user_id = $request->input('user_id');
+            $article->content = $request->input('content');
+            $article->save();
+
+        return redirect(Route('admin.dashboard.article'))->with('update','Data article '.$article->title.' berhasil di perbarui'); 
     }
 
     /**
@@ -113,6 +149,7 @@ class AdminArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect(Route('admin.dashboard.article'))->with('delete','Data article '.$article->title.' berhasil di hapus'); 
     }
 }
