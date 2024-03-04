@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminDashboardController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +14,9 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->count();
-        $articles = DB::table('articles')->count();
+        $articles = DB::table('articles')->get();
 
-
-        return view('admin.dashboard',['userCount' => $users,'articleCount' => $articles]);
-        
+        return view('home',['articles' => $articles]);
     }
 
     /**

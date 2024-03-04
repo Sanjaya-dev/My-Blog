@@ -13,8 +13,10 @@
 .user-photo {
     width: 15%;
 }
+
 /* end navbar */
-div#article-content {
+
+/* div#article-content {
     height: 100vh;
     display: flex;
-}
+} */

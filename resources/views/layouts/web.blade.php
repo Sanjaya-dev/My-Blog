@@ -12,7 +12,7 @@
     <title>@yield('title')</title>
 </head>
 
-<body>
+<body class="@yield('bodyClass')">
     @include('components.nav.navbar')
 
     @yield('content')

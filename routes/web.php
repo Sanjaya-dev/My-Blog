@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminArticleController;
-use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Dashboard\AdminArticleController;
+use App\Http\Controllers\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\AdminUserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function(){
-    return view('home');
-})->name('home');
+Route::get('/home', [HomeController::class,'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     // socialite google
