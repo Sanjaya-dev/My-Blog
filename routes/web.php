@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class,'index'])->name('home');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
     // socialite google
     Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
     Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
