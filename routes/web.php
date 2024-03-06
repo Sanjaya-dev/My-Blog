@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\AdminUserController;
 use App\Http\Controllers\HomeController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,17 +19,19 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', [HomeController::class,'index'])->name('home');
+Route::get('/', [HomeController::class,'index'])->name('home');
+
+// Auth::routes(['verifiy' => true]);
+
+// socialite google
+Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
+Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
 
 Route::middleware(['auth','admin'])->group(function () {
-    // socialite google
-    Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
-    Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
-    
     // admin
     Route::get('/admin/dashboard',[AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
