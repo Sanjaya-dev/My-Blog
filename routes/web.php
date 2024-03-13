@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DetailArticleController;
+use App\Http\Controllers\Dashboard\AdminUserController;
 use App\Http\Controllers\Dashboard\AdminArticleController;
 use App\Http\Controllers\Dashboard\AdminDashboardController;
-use App\Http\Controllers\Dashboard\AdminUserController;
-use App\Http\Controllers\HomeController;
 
 
 /*
@@ -24,6 +25,8 @@ use App\Http\Controllers\HomeController;
 // });
 
 Route::get('/', [HomeController::class,'index'])->name('home');
+
+Route::get('/detailarticle/{article}', [DetailArticleController::class,'index'])->name('home.detailarticle');
 
 // Auth::routes(['verifiy' => true]);
 
