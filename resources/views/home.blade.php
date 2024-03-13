@@ -30,8 +30,7 @@ article
                         style="max-width: 290px;max-height: 200px">
                     <div class="card-body">
                         <h5 class="card-title">{{$article->title}}</h5>
-                        <p class="card-text">{{$article->content}}</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="{{route('home.detailarticle',$article->id)}}" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
             </div>
