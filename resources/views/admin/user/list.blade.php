@@ -23,6 +23,7 @@
             @endforeach
         </tbody>
     </table>
+    {{ $users->links() }}
 
 </div>
 <!-- /.container-fluid -->

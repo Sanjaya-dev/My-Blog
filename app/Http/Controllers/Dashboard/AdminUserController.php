@@ -15,7 +15,7 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        $users = DB::select('select * from users');
+        $users = DB::table('users')->paginate(10);
         return view('admin.user.list',['users' => $users]);
     }
 
