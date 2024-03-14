@@ -14,4 +14,5 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
     require('tailwindcss'),
     require('autoprefixer'),
-]);
+]).copy('node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js', 'public/js');
+
