@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label for="content" class="form-label">Content</label>
                             <textarea name="content"
-                                class="form-control">{{old('content') ?? $article->content ?? ''}}</textarea>
+                                class="form-control" id="editor">{{old('content') ?? $article->content ?? ''}}</textarea>
                             @error('content')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -52,4 +52,12 @@
         </div>
     </div>
 </div>
+<script src="{{asset('js/ckeditor.js')}}"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection
