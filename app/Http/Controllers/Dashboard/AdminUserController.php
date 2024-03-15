@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class AdminUserController extends Controller
 {
@@ -13,10 +14,13 @@ class AdminUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, User $user)
     {
-        $users = DB::table('users')->paginate(10);
-        return view('admin.user.list',['users' => $users]);
+        $search = $request->q;
+        $query = $user;
+        $users = User::scopeSearchByNameOrEmail($query,$search)->paginate(10);
+        $q = $request->all();
+        return view('admin.user.list',['users' => $users, 'request' => $q]);
     }
 
     /**

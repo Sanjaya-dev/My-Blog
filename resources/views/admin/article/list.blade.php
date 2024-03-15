@@ -40,7 +40,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{route('admin.dashboard.article')}}" method="get" class="input-group" style="width:50%">
-                <input type="text" placeholder="title article" class="form-control" name="q">
+                <input type="text" placeholder="title article" class="form-control" name="q" value="{{$request['q'] ?? ''}}">
                 <button type="submit" class="btn btn-info btn-sm">
                     search
                 </button>

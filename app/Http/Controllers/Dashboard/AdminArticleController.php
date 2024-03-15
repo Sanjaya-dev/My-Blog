@@ -15,9 +15,12 @@ class AdminArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::with('User')->get();
+        $q = $request->q;
+        $articles = Article::with('User')->when($q,function($query) use ($q){
+            return $query->where('title','like','%'.$q.'%');
+        })->paginate(10);
         return view('admin.article.list',[
             'articles' => $articles
         ]);
